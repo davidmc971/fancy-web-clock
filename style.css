@@ -17,7 +17,10 @@ body {
   font-size: 1.125rem;
   min-height: 100vh;
   background-color: #eee;
-
+  background-image: url(https://unsplash.com/photos/gOQMwGlYe2I/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTZ8fGRlc2VydCUyMHN1bnNldHxlbnwwfHx8fDE2ODYwMDI1MjV8MA&force=true);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -45,7 +48,7 @@ body {
   border-radius: 0.5rem;
   border-block: 0.25rem solid #eee;
   overflow: hidden;
-  box-shadow: 0 0 0.25rem #ccc;
+  box-shadow: 0 0 0.25rem #00000040;
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-template-areas:
@@ -59,10 +62,6 @@ body {
 
 .clock .time-minutes {
   grid-column: 2;
-}
-
-.clock .temperature {
-  background-color: #fbb;
 }
 
 .clock .time .half {
@@ -104,8 +103,74 @@ body {
   padding-bottom: 0.0625ch;
   background-color: #222;
   color: transparent;
-  text-shadow: 0 0 0.125rem #ffffff60;
+  --text-shadow-blur: 0.0625rem;
+  --text-shadow-color-1: #ffffff80;
+  --text-shadow-color-2: #ffffff80;
+  text-shadow:
+    /* 0 calc(-1 * var(--text-shadow-blur)) var(--text-shadow-blur) var(--text-shadow-color-1), */
+    0 0 var(--text-shadow-blur) var(--text-shadow-color-2);
   -webkit-background-clip: text;
   -moz-background-clip: text;
   background-clip: text;
+}
+
+.clock .temperature {
+  background-color: #222;
+  border-radius: 0.25rem;
+  color: #eee;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  font-size: 0.675rem;
+  line-height: 0.75rem;
+  border: 1px solid #20202040;
+  outline: 1px solid #e0e0e040;
+  outline-offset: -2px;
+  background: linear-gradient(
+    0deg,
+    rgba(32, 32, 32, 0.5) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  backdrop-filter: blur(2rem);
+  text-shadow: 0 0 0.0625rem black;
+  .left {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.125rem;
+    .date {
+      flex: 1;
+    }
+    .city {
+      flex: 1.25;
+      font-size: 1.25em;
+      font-weight: 500;
+    }
+    .extra {
+      flex: 1;
+    }
+  }
+  .right {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 0.125rem;
+    .temp-current {
+      display: flex;
+      align-items: center;
+      flex: content;
+      font-size: 2.25em;
+      font-weight: 500;
+    }
+    .temp-range {
+      flex: 1;
+    }
+  }
+  .celsius::after {
+    content: "°C";
+    font-size: 0.5em;
+    vertical-align: super;
+  }
 }
