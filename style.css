@@ -1,0 +1,111 @@
+* {
+  box-sizing: border-box;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  color-scheme: light;
+  font-size: clamp(12px, 2vw, 16px);
+  font-size: 200%;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.125rem;
+  min-height: 100vh;
+  background-color: #eee;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 0.5rem;
+}
+
+.clock {
+  padding: 0.5rem;
+  width: 16rem;
+  min-width: min-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.clock > * {
+  grid-column: 1 / -1;
+}
+
+.clock .time {
+  aspect-ratio: 1;
+  background-color: white;
+  border-radius: 0.5rem;
+  border-block: 0.25rem solid #eee;
+  overflow: hidden;
+  box-shadow: 0 0 0.25rem #ccc;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas:
+    "upper"
+    "lower";
+}
+
+.clock .time-hours {
+  grid-column: 1;
+}
+
+.clock .time-minutes {
+  grid-column: 2;
+}
+
+.clock .temperature {
+  background-color: #fbb;
+}
+
+.clock .time .half {
+  /* background: rgb(32, 32, 32);
+  background: linear-gradient(
+    0deg,
+    rgba(32, 32, 32, 0.5) 0%,
+    rgba(255, 255, 255, 0) 100%
+  ); */
+  --box-halves-radii: 0.25rem;
+  --box-shadow-blur: 0.5rem;
+  box-shadow: inset 0 calc(-1 * var(--box-shadow-blur)) var(--box-shadow-blur)
+      calc(-1 * var(--box-shadow-blur)) #30303080,
+    inset 0 var(--box-shadow-blur) var(--box-shadow-blur)
+      calc(-1 * var(--box-shadow-blur)) #ffffff80;
+}
+
+.clock .time .upper {
+  border-top-left-radius: var(--box-halves-radii);
+  border-top-right-radius: var(--box-halves-radii);
+  grid-area: upper;
+}
+
+.clock .time .lower {
+  border-bottom-left-radius: var(--box-halves-radii);
+  border-bottom-right-radius: var(--box-halves-radii);
+  grid-area: lower;
+}
+
+.clock .time .digits {
+  grid-area: upper;
+  grid-row: 1 / span 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  font-size: 5rem;
+  font-weight: 300;
+  padding-bottom: 0.0625ch;
+  background-color: #222;
+  color: transparent;
+  text-shadow: 0 0 0.125rem #ffffff60;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+}
